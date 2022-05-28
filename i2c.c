@@ -6,10 +6,10 @@
 #include "i2cctl.h"
 
 int main(char argc, char** argv)
-{	
+{
 	if (argc > 1 && !strcmp(argv[1], "lock"))   { i2c_lock();		return 0; }
 	if (argc > 1 && !strcmp(argv[1], "unlock")) { i2c_release();	return 0; }
-	
+
 	if (argc < 4)
 	{	printf("Usage: i2c {addr} {reg} {length_bytes} {R/W} [{value}]\n");
 		printf("Give all numbers in hexadecimal.\n");
