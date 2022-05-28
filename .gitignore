@@ -1,0 +1,14 @@
+ircaminstall.sh
+uvcaminstall.sh
+gdsrc.sh
+.c*
+.gitconfig
+.l*
+.p*
+.v*
+D*
+M*
+P*
+*.log
+mlx*
+test*
