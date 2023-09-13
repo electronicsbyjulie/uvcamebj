@@ -51,7 +51,7 @@ do
 done
 
 # yesterweek's files
-for dayz in {1..7}
+for dayz in {1..60}
 do
     for remm in $rems
     do

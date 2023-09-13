@@ -744,26 +744,14 @@ int main(char argc, char** argv)
 					b = g = r;
 				}
 				else
-                {   
-                    /*r = 255 * pow(0.00390625*r, 1.21);
-                    g = 255 * pow(0.00390625*g, 1.33);
-                    b = 255 * pow(0.00390625*b, 1.25);*/
-                    
-                    // r -= 16; g -= 16; b -= 16;
+                {
                     
                     r /= 255; g /= 255; b /= 255;
-                    // r /= 238; g /= 238; b /= 238;
                     
-                    /*r = pow(r, 1.25);
-                    g = pow(g, 0.85);
-                    b = pow(b, 0.95);*/
-                    
-                    // if (isnan(b)) b = 0;
-                    
-                    /*if (1) // g>r) 
-                    {   b += 0.10*pow(g, 2); if (b>1) b=1;
-                        r -= 0.50*pow(g, 2); if (r<0) r=0;
-                    }*/
+				    // Gamma.
+				    r = pow(r, 1.5);
+				    g = pow(g, 0.9);
+				    b = pow(b, 1.3);
                     
                     r *= 255; g *= 255; b *= 255;
 				    
@@ -776,6 +764,7 @@ int main(char argc, char** argv)
 			    // plum = 0.30 * r + 0.56 * g + 0.14 * b;       // normally.
 				// plum = 0.33 * g + 0.34 * b + 0.33 * r;          // this works better.
 				plum = 0.20 * g + 0.30 * b + 0.50 * r;          // or try this.
+				
 				
 				r_l = (r - plum) * 0.7;
 				g_l = (g - plum) * 0.7;
@@ -813,6 +802,7 @@ int main(char argc, char** argv)
 				    b_l *= dimgray;
 				}
 				
+				
 				                
 				
 				// if (isnan(b_l)) b_l = 0;
@@ -847,6 +837,7 @@ int main(char argc, char** argv)
 				    // if (b_l < 0) b_l = 0.5;
 				    //g_l = 0;
 				    
+				    // if (r_l < 0) r_l *= 0.75;
 				    if (b_l < 0) b_l /= 2;
 				    
 				    rdat[bx] = floor(fmax(0,fmin(255,     0.6*plum + r_l + g_l        )));
@@ -881,9 +872,11 @@ int main(char argc, char** argv)
 				    break;
 				    
 				    case _gbu:
+				    // if (r_l > 0) r_l *= 4;
+				    
 					r = plum + g_l;
 				    g = plum + b_l;
-				    b = (plum + r_l) * 0.75;
+				    b = (plum + r_l);
 				    ;
 				    /*
 				    float corr = 1.25;
